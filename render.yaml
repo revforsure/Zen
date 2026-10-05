@@ -1,0 +1,33 @@
+# Render Blueprint. Create it via: Dashboard -> New -> Blueprint -> pick this repo.
+# Secrets (sync: false) are entered in the dashboard, never committed.
+services:
+  - type: worker              # a background worker: no HTTP port needed, never spins down
+    name: zenith-bot
+    runtime: docker           # the Dockerfile installs FFmpeg, which native Python runtimes lack
+    plan: starter             # persistent disks need a paid plan
+    autoDeploy: true
+    disk:
+      name: bot-data
+      mountPath: /data        # keeps the SQLite database across deploys/restarts
+      sizeGB: 1
+    envVars:
+      - key: API_ID
+        sync: false
+      - key: API_HASH
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: SESSION_STRING
+        sync: false
+      - key: OWNER_IDS
+        sync: false
+      - key: MUSIC_API_URL
+        value: https://musicapi.x007.workers.dev
+      - key: MUSIC_ENGINES
+        value: gaama,seevn
+      - key: DATABASE_PATH
+        value: /data/bot.db
+      - key: BOT_NAME
+        value: Zenith
+      - key: WAIFU_DEFAULT_INTERVAL
+        value: "120"

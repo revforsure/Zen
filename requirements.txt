@@ -1,0 +1,8 @@
+# NOTE: versions below could not be verified against Python 3.14 + Android ARM64
+# from the build sandbox (no network). See README "Compatibility" before installing.
+pyrofork>=2.3.60
+py-tgcalls>=2.1.0
+httpx>=0.27
+python-dotenv>=1.0
+# Optional speed-up; needs a C compiler on Termux (pkg install clang). Safe to remove.
+# tgcrypto>=1.2.5
